@@ -1,9 +1,11 @@
 import {dotMultiply, Matrix, matrix, randomInt, range, subset, index } from "mathjs";
-import { shuffle } from "./utils";
+import math = require("mathjs");
+import { shuffle, randomMatrix } from "./utils";
 
 class SGD {
     X: Matrix
     y: Array<number>
+    W: Matrix | math.MathArray
     lr: number
     batchSize: number
     objective: any
@@ -22,6 +24,13 @@ class SGD {
         this.gradient = gradient;
     }
 
+    initiateWeights() {
+        const numRows = this.X.size()[1]
+        const numCols = this.X.size()[0]
+
+        this.W  = randomMatrix([numRows, numCols])
+    }
+
     selectSubSet() {
         [this.X, this.y] = shuffle(this.X, this.y);
 
@@ -34,6 +43,8 @@ class SGD {
         this.subsetY = this.y.slice(randValue, randValue + this.batchSize)
 
     }
+
+
 
 
 }
