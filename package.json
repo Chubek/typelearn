@@ -1,0 +1,25 @@
+{
+    "name": "typelearn",
+    "version": "1.0.0",
+    "description": "A Typescript Machine Learning library",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+      "/dist"
+    ],
+    "scripts": {
+        "test": "mocha --reporter spec --compilers ts:ts-node/register 'src/**/*.test.ts'",
+        "compile": "tsc --project tsconfig.json"
+
+    },
+    "dependencies": {
+        "mocha": "9.1.3",
+        "@types/mocha": "9.0.0",
+        "chai": "4.3.4",
+        "@types/chai": "4.2.22",
+        "ts-node": "10.4.0",
+        "typescript": "4.4.4",
+        "mathjs": "10.0.0"      
+
+    }
+  }
