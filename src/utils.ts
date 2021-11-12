@@ -1,4 +1,4 @@
-import { Matrix, randomInt, range, subset } from "mathjs";
+import { matrix, Matrix, randomInt, range, subset } from "mathjs";
 import math = require("mathjs");
 
 export const shuffle = (X: Matrix): Matrix => {
@@ -24,5 +24,8 @@ export const shuffle = (X: Matrix): Matrix => {
         })
 
         newMatrix.push(sub);
+        alreadyAdded.push(randValue);
     }) 
+
+    return matrix(newMatrix)
 }
