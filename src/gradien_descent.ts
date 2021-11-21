@@ -5,8 +5,11 @@ import {
     randomInt,
     range,
     subset,
+    subtract,
     index,
+    abs,
     number,
+    sum,
     multiply
 } from "mathjs";
 import math = require("mathjs");
@@ -49,7 +52,6 @@ class SGD {
         this.momentum = momentum;
         this.maxIter = maxIter;
         this.thresh = thresh;
-        this.gradMult = gradMult
     }
 
     initiateWeights() {
@@ -78,17 +80,23 @@ class SGD {
         let i = 0;
         let diff = 0.000001;
         let w0 = 0.0001;
-        let wHistory: Array<Matrix | number[][] > = [];
-        let fHistory: Array<Matrix | number[][] > = []; 
+
 
         while (i < this.maxIter &&  diff > this.thresh) {
             this.selectSubSet();
 
-            this.W = multiply(this.gradient(this.W, this.gradMult), this.lr) as any  - multiply(this.W as any, this.momentum as any) as any
-            wHistory.push(this.W);
+            const yHat = this.objective(this.X, this.W, w0);
+            const loss = this.cost(this.subsetY, yHat);
 
-            const y = this.objective(this.subSetX, this.W, w0);
-            fHistory.push(y);
+            const grad = this.gradient(this.X, loss);
+
+            const newWeights = this.W as any - multiply(this.gradient as any, this.lr) as any;
+            
+            diff = sum(subtract(this.W as any, newWeights as any));
+            i += 1;
+
+            this.W = newWeights;
+
 
         }
     }

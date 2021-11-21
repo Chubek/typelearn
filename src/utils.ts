@@ -33,14 +33,14 @@ export const shuffle = (X: Matrix, y: Array<number>): [Matrix, Array<number>] =>
     return [matrix(newMatrixX), newMatrixY]
 }
 
-export const randomMatrix = (shape: Array<number> | number): Matrix | math.MathArray => {
+export const randomMatrix = (shape: Array<number> | number): Matrix | number[][] => {
     let newMatrix = math.ones(shape);
 
-    newMatrix.forEach((_value, index, _matrix) => {
+    newMatrix.forEach((_value: any, index: any, _matrix: any) => {
         newMatrix = math.subset(newMatrix, math.index(index), math.random(0, 1));
     })
     
 
-    return newMatrix
+    return newMatrix as Matrix | number[][]
 
 }
